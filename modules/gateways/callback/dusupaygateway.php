@@ -2,13 +2,10 @@
 //////////////////////////////////////////////////////
 //***************************************************/
 //* Please see the ReadMe.txt file for instruction  */
-//* This File is Written For Voguepay Gateway       */
+//* This File is Written For DUSUPAY Payment Gateway */
 //* For Any Help, Contact me                        */
 //***************************************************/
-//* Email: mbosinwa@mbosinwa.me                     */
-//* Phone: 08163429760                              */
-//* Website: http://www.mbosinwa.me                 */ 
-//* WebHost: http://www.hostmeout.com.ng            */ 
+//* Email: oluwasayo12@gmail.com                    */
 //////////////////////////////////////////////////////
 # Required File Includes
 //include("../../../dbconnect.php");
