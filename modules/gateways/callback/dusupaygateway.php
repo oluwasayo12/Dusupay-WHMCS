@@ -24,8 +24,10 @@ $gatewayModuleName = basename(__FILE__, '.php');
 $GATEWAY = getGatewayVariables($gatewaymodule);
 if (!$GATEWAY["type"]) die("Module Not Activated"); # Checks gateway module is active before accepting callback
 // $transaction_id = $_POST['transaction_id'];
-// $data = file_get_contents("https://voguepay.com/?v_transaction_id=".$transaction_id."&type=xml");
-$data = file_get_contents("http://sandbox.dusupay.com/transactions/check_status/param1/param2.json");
+$merchant_id = $_POST['dusupay_merchantId'];
+$tx_ref = $_POST['dusupay_transactionReference'];
+
+$data = file_get_contents("http://sandbox.dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json");
 $transaction = json_decode($data, true);
 # Get Returned Variables - Adjust for Post Variable Names from your Gateway's Documentation
 $invoice_id = $transaction['dusupay_transactionReference'];
