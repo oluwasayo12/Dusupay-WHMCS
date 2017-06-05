@@ -3,13 +3,10 @@
 //***************************************************/
 //* Do Not Run This File In Directly on ur Browser  */
 //* Please see the ReadMe.txt file for instruction  */
-//* This File is Written For Voguepay Gateway       */
+//* This File is Written For DUSUPAY Payment Gateway*/
 //* For Any Help, Contact me                        */
 //***************************************************/
-//* Email: mbosinwa@mbosinwa.me                     */
-//* Phone: 08163429760                              */
-//* Website: http://www.mbosinwa.me                 */ 
-//* WebHost: http://www.hostmeout.com.ng            */ 
+//* Email: oluwasayo12@gmail.com                  */
 //////////////////////////////////////////////////////
 function dusupaygateway_config() {
 $pay_color  = 'blue'; //Default Favourite Color is blue
@@ -17,7 +14,7 @@ $pay_color  = 'blue'; //Default Favourite Color is blue
      "FriendlyName" => array("Type" => "System", "Value"=>"DUSUPAY Global Gateway In Africa"),
      "dusupay_merchantId" => array("FriendlyName" => "DUSUPAY Merchant ID", "Type" => "text", "Size" => "20", ),
      "cur" => array("FriendlyName" => "Currency", "Type" => "dropdown", "Options" => "NGN,USD", "Description" => "Select Currency", ),
-     "dusupay_redirectURL" => array("FriendlyName" => "Redirect URL", "Type" => "text", "Size" => "40", ),
+     "dusupay_redirectURL" => array("FriendlyName" => "Redirect URL", "Type" => "text", "Size" => "40")
     );
     return $configarray;
 }
