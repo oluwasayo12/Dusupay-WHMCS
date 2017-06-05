@@ -49,7 +49,7 @@ function dusupaygateway_link($params) {
     $currency = $params['currency'];
     # Enter your code submit to the gateway...
  
-    $code = '<form method="post" action="https://dusupay.com/dusu_payments/dusupay">
+    $code = '<form method="post" action="http://sandbox.dusupay.com/dusu_payments/dusupay">
 <input type="hidden" name="dusupay_merchantId" value="'.$merchant_id.'" />
 <input type="hidden" name="dusupay_itemId" value="Invoice Payment" />
 <input type="hidden" name="dusupay_amount" value="'.$amount.'" />
