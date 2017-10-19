@@ -27,7 +27,8 @@ $data = file_get_contents("https://dusupay.com/transactions/check_status/".$merc
 $transaction = json_decode($data, true);
 # Get Returned Variables - Adjust for Post Variable Names from your Gateway's Documentation
 $invoice_id = $transaction['dusupay_transactionReference'];
-$status = $transaction['status'];
+$status = $transaction['dusupay_transactionStatus'];
+//$status = $transaction['status'];
 $transid = $transaction['dusupay_transactionId'];
 $invoiceid = checkCbInvoiceID($invoice_id,$GATEWAY["name"]); 
 checkCbTransID($transid); 
