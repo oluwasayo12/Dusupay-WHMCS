@@ -27,27 +27,34 @@ $data = file_get_contents("https://dusupay.com/transactions/check_status/".$merc
 $transaction = json_decode($data, true);
 # Get Returned Variables - Adjust for Post Variable Names from your Gateway's Documentation
 $invoice_id = $transaction['dusupay_transactionReference'];
-$status = $transaction['dusupay_transactionStatus'];
-//$status = $transaction['status'];
+$status2 = $transaction['dusupay_transactionStatus'];
+$status = $transaction['status'];
 $transid = $transaction['dusupay_transactionId'];
-$invoiceid = checkCbInvoiceID($invoice_id,$GATEWAY["name"]); 
+$invoiceid = checkCbInvoiceID($invoice_id,$gatewayModuleName); 
 checkCbTransID($transid); 
-if ($status =="COMPLETE" ) {
+if ($status =="success" ) {
      //Successful
     addInvoicePayment($invoice_id,$transid,$amount,$fee,$gatewaymodule); 
-    logTransaction($GATEWAY["name"],$_POST,"Transaction Was Successful");
+    logTransaction($gatewayModuleName,$_POST,"Transaction Was Successful");
+     $redirect_url = "//".$_SERVER['SERVER_NAME']."/billing/viewinvoice.php?id=".$invoiceid;
+     header('Location: '.$redirect_url);
+     
 }
 else
 {
-logTransaction($GATEWAY["name"],$_POST,"Transaction Not Approved OR Unrecognised Merchant ID");
+logTransaction($gatewayModuleName,$_POST,"Transaction Not Approved OR Unrecognised Merchant ID");
+exit('Error');
 }
-if ($status =="CANCELLED") {
-    logTransaction($GATEWAY["name"],$_POST,"CANCELLED");
+if ($status2 =="CANCELLED") {
+    logTransaction($gatewayModuleName,$_POST,"CANCELLED");
+     exit('Error');
 }
-if ($status =="FAILED") {
-    logTransaction($GATEWAY["name"],$_POST,"FAILED");
+if ($status2 =="FAILED") {
+    logTransaction($gatewayModuleName,$_POST,"FAILED");
+     exit('Error');
 }
-if ($status =="PENDING") {
-    logTransaction($GATEWAY["name"],$_POST,"PENDING");
+if ($status2 =="PENDING") {
+    logTransaction($gatewayModuleName,$_POST,"PENDING");
+     exit('Error');
 }
 ?>
