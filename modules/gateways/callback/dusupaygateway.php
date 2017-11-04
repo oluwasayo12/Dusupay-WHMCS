@@ -30,7 +30,7 @@ $invoice_id = $transaction['dusupay_transactionReference'];
 $status2 = $transaction['dusupay_transactionStatus'];
 $status = $transaction['status'];
 $transid = $transaction['dusupay_transactionId'];
-$invoiceid = checkCbInvoiceID($invoice_id,$gatewayModuleName); 
+$invoiceid = checkCbInvoiceID($invoice_id,$GATEWAY["name"]); 
 checkCbTransID($transid); 
 if ($status =="success" ) {
      //Successful
