@@ -13,8 +13,7 @@ $pay_color  = 'blue'; //Default Favourite Color is blue
     $configarray = array(
      "FriendlyName" => array("Type" => "System", "Value"=>"DUSUPAY Global Gateway In Africa"),
      "dusupay_merchantId" => array("FriendlyName" => "DUSUPAY Merchant ID", "Type" => "text", "Size" => "20", ),
-     "cur" => array("FriendlyName" => "Currency", "Type" => "dropdown", "Options" => "NGN,USD", "Description" => "Select Currency", ),
-     "dusupay_redirectURL" => array("FriendlyName" => "Redirect URL", "Type" => "text", "Size" => "40")
+     "cur" => array("FriendlyName" => "Currency", "Type" => "dropdown", "Options" => "NGN,USD", "Description" => "Select Currency", )
     );
     return $configarray;
 }
@@ -45,7 +44,11 @@ function dusupaygateway_link($params) {
     $systemurl = $params['systemurl'];
     $currency = $params['currency'];
     # Enter your code submit to the gateway...
- 
+  $isSSL = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443);
+$callbackUrl = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
+        substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/')) .
+        '/modules/gateways/callback/dusupaygateway.php';
+
     $code = '<form method="post" action="https://dusupay.com/dusu_payments/dusupay">
 <input type="hidden" name="dusupay_merchantId" value="'.$merchant_id.'" />
 <input type="hidden" name="dusupay_itemId" value="Invoice Payment" />
@@ -53,7 +56,7 @@ function dusupaygateway_link($params) {
 <input type="hidden" name="dusupay_itemName" value="'.$description.'" />
 <input type="hidden" name="dusupay_transactionReference" value="'.$invoiceid.'" />
 <input type="hidden" name="dusupay_currency" value="'.$cur.'" />
-<input type="hidden" name="dusupay_redirectURL" value="'.$notify_url.'" />
+<input type="hidden" name="dusupay_successURL" value="'.$callbackUrl.'" />
 <input type="image" src="https://dusupay.com/img/paybuttons/dusupaybtn6.png" border="0" alt="We Accept DUSUPAY" />
 </form>';
     return $code;
