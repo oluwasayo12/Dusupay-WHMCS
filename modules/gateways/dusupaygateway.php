@@ -56,6 +56,7 @@ $callbackUrl = 'http' . ($isSSL ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] .
 <input type="hidden" name="dusupay_itemName" value="'.$description.'" />
 <input type="hidden" name="dusupay_transactionReference" value="'.$invoiceid.'" />
 <input type="hidden" name="dusupay_currency" value="'.$cur.'" />
+<input type="hidden" name="dusupay_redirectURL" value="'.$callbackUrl.'" />
 <input type="hidden" name="dusupay_successURL" value="'.$callbackUrl.'" />
 <input type="image" src="https://dusupay.com/img/paybuttons/dusupaybtn6.png" border="0" alt="We Accept DUSUPAY" />
 </form>';
