@@ -17,7 +17,7 @@ require_once __DIR__ . '/../../../includes/functions.php';
 require_once __DIR__ . '/../../../includes/gatewayfunctions.php';
 require_once __DIR__ . '/../../../includes/invoicefunctions.php';
 $gatewayModuleName = basename(__FILE__, '.php');
-$GATEWAY = getGatewayVariables($gatewaymodule);
+$GATEWAY = getGatewayVariables($gatewayModuleName);
 if (!$GATEWAY["type"]) die("Module Not Activated"); # Checks gateway module is active before accepting callback
 // $transaction_id = $_POST['transaction_id'];
 $merchant_id = $_POST['dusupay_merchantId'];
@@ -32,9 +32,9 @@ $status = $transaction['status'];
 $transid = $transaction['dusupay_transactionId'];
 $invoiceid = checkCbInvoiceID($invoice_id,$GATEWAY["name"]); 
 checkCbTransID($transid); 
-if ($status =="success" ) {
+if ($status2 =="COMPLETE" ) {
      //Successful
-    addInvoicePayment($invoice_id,$transid,$amount,$fee,$gatewaymodule); 
+    addInvoicePayment($invoice_id,$transid,$amount,$fee,$gatewayModuleName); 
     logTransaction($gatewayModuleName,$_POST,"Transaction Was Successful");
      $redirect_url = "//".$_SERVER['SERVER_NAME']."/billing/viewinvoice.php?id=".$invoiceid;
      header('Location: '.$redirect_url);
