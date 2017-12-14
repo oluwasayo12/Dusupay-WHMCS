@@ -38,24 +38,23 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 curl_close($curl);
 $transaction = json_decode($response, true);
-echo $transaction['Response']['dusupay_transactionStatus'];
-print_r($transaction);
-die();
+
+
 
 //$data = file_get_contents("https://dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json");
 //$transaction = json_decode($data, true);
 
 # Get Returned Variables - Adjust for Post Variable Names from your Gateway's Documentation
-$invoice_id = $transaction['dusupay_transactionReference'];
-$status2 = $transaction['dusupay_transactionStatus'];
-$status = $transaction['status'];
-$transid = $transaction['dusupay_transactionId'];
+$invoice_id = $transaction['Response']['dusupay_transactionReference'];
+$status2 = $transaction['Response']['dusupay_transactionStatus'];
+$status = $transaction['Response']['status'];
+$transid = $transaction['Response']['dusupay_transactionId'];
 $invoiceid = checkCbInvoiceID($invoice_id,$GATEWAY["name"]); 
 checkCbTransID($transid); 
 if ($status2 =="COMPLETE" ) {
      //Successful
     addInvoicePayment($invoice_id,$transid,$amount,$fee,$gatewayModuleName); 
-    logTransaction($gatewayModuleName,$_POST,"Transaction Was Successful");
+    logTransaction($gatewayModuleName,$response,"Transaction Was Successful");
      $redirect_url = "//".$_SERVER['SERVER_NAME']."/billing/viewinvoice.php?id=".$invoiceid;
      header('Location: '.$redirect_url);
      
