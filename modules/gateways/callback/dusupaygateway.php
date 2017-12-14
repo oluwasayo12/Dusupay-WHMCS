@@ -38,6 +38,7 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 curl_close($curl);
 $transaction = json_decode($response, true);
+echo $transaction['Response']['dusupay_transactionStatus'];
 print_r($transaction);
 die();
 
