@@ -22,9 +22,11 @@ if (!$GATEWAY["type"]) die("Module Not Activated"); # Checks gateway module is a
 // $transaction_id = $_POST['transaction_id'];
 $merchant_id = $GATEWAY['dusupay_merchantId'];
 $tx_ref = $_GET['dusupay_transactionReference'];
-
+echo "https://dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json <br/>";
 $data = file_get_contents("https://dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json");
 $transaction = json_decode($data, true);
+print_r($transaction);
+die();
 # Get Returned Variables - Adjust for Post Variable Names from your Gateway's Documentation
 $invoice_id = $transaction['dusupay_transactionReference'];
 $status2 = $transaction['dusupay_transactionStatus'];
