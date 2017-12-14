@@ -38,6 +38,8 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 curl_close($curl);
 $transaction = json_decode($response, true);
+print_r($transaction);
+die();
 
 //$data = file_get_contents("https://dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json");
 //$transaction = json_decode($data, true);
