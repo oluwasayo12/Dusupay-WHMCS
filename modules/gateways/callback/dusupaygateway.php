@@ -20,8 +20,8 @@ $gatewayModuleName = basename(__FILE__, '.php');
 $GATEWAY = getGatewayVariables($gatewayModuleName);
 if (!$GATEWAY["type"]) die("Module Not Activated"); # Checks gateway module is active before accepting callback
 // $transaction_id = $_POST['transaction_id'];
-$merchant_id = $_POST['dusupay_merchantId'];
-$tx_ref = $_POST['dusupay_transactionReference'];
+$merchant_id = $GATEWAY['dusupay_merchantId'];
+$tx_ref = $_GET['dusupay_transactionReference'];
 
 $data = file_get_contents("https://dusupay.com/transactions/check_status/".$merchant_id."/".$tx_ref.".json");
 $transaction = json_decode($data, true);
